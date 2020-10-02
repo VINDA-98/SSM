@@ -40,9 +40,17 @@
 
 <br>
 
+在src下右键添加新的文件，因为对maven项目的目录结构要求很严，IDEA会提醒用户在改文件夹下最好创建什么项目
+
+![image-20201002163111704](https://gitee.com/Vinda_Boy/myphoto/raw/master/img/image-20201002163111704.png)
+
+<br>
+
 自动导入后就完成项目新建啦
 
 ![image-20201002110428772](https://gitee.com/Vinda_Boy/myphoto/raw/master/img/image-20201002110428772.png)
+
+<br>
 
 
 
@@ -635,3 +643,30 @@ public class StudentController {
 启动成功后，在浏览器地址栏输入  ==ip+端口号+请求url== 就可以看到结果啦
 
 ![image-20201002161015257](https://gitee.com/Vinda_Boy/myphoto/raw/master/img/image-20201002161015257.png)
+
+
+
+<br>
+
+## 9、小结
+
+**本次碰到的坑：**
+1、
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name
+对应的bean没有添加注解
+对应bean添加注解错误，例如将spring的@Service错选成dubbo的包
+选择错误的自动注入办法。
+
+2、
+org.springframework.web.util.NestedServletException:
+Request processing failed; nested exception is java.lang.NullPointerException
+错误出现的原因：处理该请求的方法所需要的部分参数在请求时没有值，导致空指针错误；
+解决方法一：在第一次访问该页的请求，或者说访问出错的页请求链接上加上处理该请求的方法所需的参数；
+解决方法二：配置两个处理请求的方法，一个不需要参数（用于第一次访问），一个不需要参数，用于处理有参数的请求。
+
+3、
+org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)问题
+即在mybatis中dao接口与mapper配置文件在做映射绑定的时候出现问题
+简单说，就是接口与xml要么是找不到，要么是找到了却匹配不到。
+
+还是有很多学不好的，先简单记录吧
