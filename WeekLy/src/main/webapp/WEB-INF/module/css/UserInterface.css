@@ -1,0 +1,63 @@
+body{
+    /*background-color:#dff0d8;*/
+    /*background-repeat:no-repeat;*/
+    /*background-size:100% 100%;*/
+    /*background-image: url("../images/16.png");*/
+    /*background-repeat:no-repeat;*/
+    /*background-size:100% 100%*/
+    background-image: url("../../../images/like.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.yulanbtn{
+    width: 12.5rem;/*设置按钮宽度*/
+    height: 2.85rem;/*设置按钮高度*/
+    color:white;/*字体颜色*/
+    background-color: #1b44ff;/*按钮背景颜色*/
+    border-radius: 3px;/*让按钮变得圆滑一点*/
+    border-width: 0;/*消去按钮丑的边框*/
+    margin: 0;
+    outline: none;/*取消轮廓*/
+    font-family:新宋体;/*字体设置为楷体*/
+    font-size: 2rem;/*设置字体大小*/
+    text-align: center;/*字体居中*/
+    cursor: pointer;/*设置鼠标箭头手势*/
+}
+
+.deleteweekly{
+    width: 12.5rem;/*设置按钮宽度*/
+    height: 2.85rem;/*设置按钮高度*/
+    color:white;/*字体颜色*/
+    background-color:red;/*按钮背景颜色*/
+    border-radius: 3px;/*让按钮变得圆滑一点*/
+    border-width: 0;/*消去按钮丑的边框*/
+    margin: 0;
+    outline: none;/*取消轮廓*/
+    font-family:新宋体;/*字体设置为楷体*/
+    font-size: 2rem;/*设置字体大小*/
+    text-align: center;/*字体居中*/
+    cursor: pointer;/*设置鼠标箭头手势*/
+}
+
+.deleteweekly:hover{/*鼠标移动时的颜色变化*/
+    background-color: #E29054;
+}
+.yulanbtn:hover{
+    background-color: #E29054;
+}
+
+#allData{
+    text-align:center;
+    width: 100%;font-size: 1.2rem;
+    cellspacing:0px;
+}
+
+/*#allData tr{
+    background-color:gray;
+    font-size: 1.55rem;
+}
+#tr td{
+    height: 0.8rem;
+    font-size: 1.55rem;
+}*/

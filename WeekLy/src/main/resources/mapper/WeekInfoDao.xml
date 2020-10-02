@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 设置为WeekInfoDao接口方法提供sql语句配置 -->
+<mapper namespace="top.weidaboy.dao.WeekinfoDao">
+    <!--    org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)问题，-->
+    <!--    即在mybatis中dao接口与mapper配置文件在做映射绑定的时候出现问题，-->
+    <!--    简单说，就是接口与xml要么是找不到，
+    要么是找到了却匹配不到。-->
+    <!--    解决方案：【resultMap修改为resultType】-->
+
+    <!--    通过id和周数返回内容某周内容-->
+    <select id="findWeeklyByIdAndWeek" resultType="top.weidaboy.entity.Weekinfo" >
+        SELECT * FROM weekinfo WHERE id = #{id} and week = #{week}
+    </select>
+
+    <!--    通过ID和周数确定是否有该周报-->
+    <select id="isExiste" resultType="boolean" >
+        SELECT * FROM weekinfo WHERE id = #{id} and week = #{week}
+    </select>
+
+    <!--    返回所有周数:类型为所有周数的数组-->
+    <select id="allWeeks" resultType="Integer" parameterType="Integer" >
+             select week from weekinfo where id= #{id} order by week desc
+    </select>
+
+    <!--    获取登录用户所有周报信息-->
+    <!--    获得weekinfo表所有信息 周数降序,ID降序-->
+    <select id="allWeekly" resultType = "top.weidaboy.entity.Weekinfo">
+            select * from weekinfo order by week Desc ,id asc ;
+    </select>
+
+    <!--    删除周报-->
+    <delete id="deleteWeekly" >
+        delete  from weekinfo where id = #{id} and week = #{week}
+    </delete>
+
+    <!--    添加新的周报-->
+    <insert id="addWeekly" parameterType="top.weidaboy.entity.Weekinfo">
+        insert into weekinfo(id,week,time,content) values(#{id},#{week},#{time},#{content})
+    </insert>
+
+    <!--    修改组长周报-->
+    <update id="updateTeamWeekly" parameterType="top.weidaboy.entity.Weekinfo">
+        update weekinfo set tcontent=#{tcontent},time=#{time} where id = #{id} and week = #{week}
+    </update>
+
+    <!--    修改个人周报-->
+    <update id="updateWeekly" parameterType="top.weidaboy.entity.Weekinfo">
+        update weekinfo set content=#{content},time=#{time} where id = #{id} and week = #{week}
+    </update>
+
+
+    <!-- 获取周数 -->
+    <select id="queryWeeks" resultType="Integer">
+        select week from weekinfo group by week
+    </select>
+
+    <!-- 获取weekInfo表的所有信息 -->
+    <select id="queryWeekInfoAll" resultType="top.weidaboy.entity.Weekinfo" parameterType="java.lang.String">
+        select * from weekinfo where 1 = 1
+        <choose>
+            <when test="_parameter!=null and _parameter!=''">
+                and week = #{week} order by week desc, id asc
+            </when>
+            <otherwise>
+                order by week desc, id asc
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--    最大周数   接口名称一定要一致啊！！！！！-->
+    <select id="MaxWeek" resultType="Integer">
+        SELECT MAX(WEEK) FROM weekinfo;
+    </select>
+
+<!--    测试专用-->
+    <insert id="insertWeeklyTest" parameterType="top.weidaboy.entity.Weekinfo">
+        insert into weekinfo(id,week,time,content,tcontent,limits)values(#{id},#{week},#{time},#{content},#{tcontent},#{limits})
+    </insert>
+
+    <!--    修改组长周报-->
+    <update id="updateTeamWeeklyTest" parameterType="top.weidaboy.entity.Weekinfo">
+        update weekinfotest set tcontent=#{tcontent},
+        time=#{time} ,limits=#{limits} where id = #{id} and week = #{week}
+    </update>
+
+    <!--    修改个人周报-->
+    <update id="updateWeeklyTest" parameterType="top.weidaboy.entity.Weekinfo">
+        update weekinfotest set content=#{content},
+        time=#{time},limits=#{limits}  where id = #{id} and week = #{week}
+    </update>
+
+</mapper>

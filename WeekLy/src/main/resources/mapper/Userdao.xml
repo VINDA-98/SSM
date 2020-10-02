@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为UserDao接口方法提供sql语句配置 -->
+<mapper namespace="top.weidaboy.dao.UserDao">
+
+    <!--    org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)问题，-->
+    <!--    即在mybatis中dao接口与mapper配置文件在做映射绑定的时候出现问题，-->
+    <!--    简单说，就是接口与xml要么是找不到，要么是找到了却匹配不到。-->
+    <select id="queryUserByID" resultType="top.weidaboy.entity.User" parameterType="Integer">
+            SELECT * FROM user WHERE id = #{id}
+        </select>
+    <!--    解决方案：【resultMap修改为resultType】-->
+    <select id="queryUserByIDandPassword" resultType="top.weidaboy.entity.User">
+            select * from user where id = #{id} and password = #{password}
+        </select>
+    <!--    返回所有用户信息-->
+    <select id="allUser" resultType="top.weidaboy.entity.User">
+            select * from user
+        </select>
+
+    <!--    修改密码-->
+    <update id="changePassword">
+            update user set password = #{password} where id= #{id}
+        </update>
+
+    <!--    查询指定组员所有信息-->
+    <select id="queryUserAll" resultType="top.weidaboy.entity.User" parameterType="java.lang.String">
+        select * from user where 1 = 1
+        <if test="_parameter!=null and _parameter!=''">
+            and team = #{team}
+        </if>
+    </select>
+</mapper>
